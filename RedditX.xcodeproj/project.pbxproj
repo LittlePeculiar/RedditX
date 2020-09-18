@@ -21,6 +21,7 @@
 		A05B997F251530060099B9A5 /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B997D251530060099B9A5 /* PostDetailVC.swift */; };
 		A05B9980251530060099B9A5 /* PostDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A05B997E251530060099B9A5 /* PostDetailVC.xib */; };
 		A05B9985251531910099B9A5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B9984251531910099B9A5 /* API.swift */; };
+		A05B99BA25153FD10099B9A5 /* Reddit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B99B925153FD10099B9A5 /* Reddit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		A05B997D251530060099B9A5 /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
 		A05B997E251530060099B9A5 /* PostDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostDetailVC.xib; sourceTree = "<group>"; };
 		A05B9984251531910099B9A5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		A05B99B925153FD10099B9A5 /* Reddit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reddit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +113,7 @@
 		A05B992425152DDC0099B9A5 /* RedditX */ = {
 			isa = PBXGroup;
 			children = (
-				A05B997425152F790099B9A5 /* Models */,
+				A05B99B825153FC10099B9A5 /* Models */,
 				A05B995D25152ECE0099B9A5 /* Service */,
 				A05B995C25152EC20099B9A5 /* Detail */,
 				A05B995B25152EB80099B9A5 /* Home */,
@@ -171,9 +173,10 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		A05B997425152F790099B9A5 /* Models */ = {
+		A05B99B825153FC10099B9A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A05B99B925153FD10099B9A5 /* Reddit.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				A05B992625152DDC0099B9A5 /* AppDelegate.swift in Sources */,
 				A05B997F251530060099B9A5 /* PostDetailVC.swift in Sources */,
 				A05B997625152FDF0099B9A5 /* PostDetailVM.swift in Sources */,
+				A05B99BA25153FD10099B9A5 /* Reddit.swift in Sources */,
 				A05B996A25152F560099B9A5 /* HomeCell.swift in Sources */,
 				A05B996025152F260099B9A5 /* HomeVC.swift in Sources */,
 				A05B997025152F700099B9A5 /* HomeVM.swift in Sources */,

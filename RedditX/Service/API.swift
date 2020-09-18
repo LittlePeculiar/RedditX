@@ -10,18 +10,47 @@ import UIKit
 enum FetchError: Error {
     case invalidUrl
     case responseFailure
+    case noData
     case serializationError
 }
 
 enum Constants {
-    static let searchTweetsUrlString = "https://api.twitter.com/1.1/search/tweets.json"
-    static let token = "AAAAAAAAAAAAAAAAAAAAANLi3wAAAAAAIugIfddmQcEt4aetIH%2BE42nNk4E%3Dh5ZxkNhQP9cAigpbfm87oK6BTzkRj9OlZo6BR9GQcGdgWbbgfP"
+    static let baseURL = "https://www.reddit.com"
+    static let postURL = "/.json"
 }
 
 protocol APIContract {
-    func fetchMedicalTweets(completion: @escaping (Swift.Result<[Tweet], FetchError>) -> Void)
+    func fetchRedditPosts(subreddit: String, completion: @escaping (Swift.Result<[Reddit], FetchError>) -> Void)
 }
 
-class API: NSObject {
+class API: APIContract {
+    
+    let session = URLSession.shared
+    
+    func fetchRedditPosts(subreddit sub: String, completion: @escaping (Result<[Reddit], FetchError>) -> Void) {
+        let postURLString = sub.isEmpty ? Constants.postURL : "/r/\(sub)" + Constants.postURL
+        guard let url = URL(string: postURLString) else {
+            completion(.failure(.invalidUrl))
+            return
+        }
+        
+        session.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                completion(.failure(.responseFailure))
+                return
+            }
+            guard let postData = data else {
+                completion(.failure(.noData))
+                return
+            }
+            guard let redditContainer = try? JSONDecoder().decode(RedditContainer.self, from: postData) else {
+                    completion(.failure(.serializationError))
+                    return
+            }
+            
+            completion(.success(redditContainer.posts))
+            
+        }.resume()
+    }
 
 }

@@ -8,22 +8,36 @@
 import UIKit
 
 class PostDetailVC: UIViewController {
+    
+    // MARK: Properties
+    private let viewModel: PostDetailVMContract
 
+    // MARK: Init
+    init(viewModel: PostDetailVMContract) {
+        self.viewModel = viewModel
+        super.init(nibName: String(describing: type(of: self)), bundle: Bundle.main)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setupUI()
     }
 
+    // MARK: methods
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupUI() {
+        
+        updateUI()
     }
-    */
+
+    private func updateUI() {
+        
+    }
 
 }

@@ -48,7 +48,7 @@ class API: APIContract {
                     return
             }
             
-            completion(.success(redditContainer.posts))
+            completion(.success(redditContainer.redditPosts))
             
         }.resume()
     }

@@ -8,36 +8,23 @@
 import UIKit
 
 protocol PostDetailVMContract {
-    var subreddit: String { get }
+    var redditURL: URL? { get }
     var title: String { get }
-    var permalink: String { get }
-    var thumbnail: String { get }
 }
 
 class PostDetailVM: PostDetailVMContract {
     
     // MARK: Properties
     let reddit: Reddit
+    var redditURL: URL? { return reddit.redditURL }
     
-    var subreddit: String { return reddit.subreddit }
-    var title: String { return reddit.title }
-    var permalink: String { return reddit.permalink }
-    var thumbnail: String { return reddit.thumbnail }
-    
-    var thumbnailPhoto: UIImage? {
-        guard
-            let imageUrl = reddit.thumbnailImageUrl,
-            let imageData = try? Data(contentsOf: imageUrl)
-            else { return nil }
-        
-        return UIImage(data: imageData)
+    public var title: String {
+        return "Details"
     }
-
     
     // MARK: Init
     init(reddit: Reddit) {
         self.reddit = reddit
     }
-    
 }
 

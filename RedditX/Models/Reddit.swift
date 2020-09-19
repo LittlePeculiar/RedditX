@@ -51,4 +51,8 @@ struct Reddit: Decodable {
     var thumbnailImageUrl: URL? {
         return URL(string: thumbnail)
     }
+    
+    var redditURL: URL? {
+        return URL(string: Constants.baseURL + permalink)
+    }
 }

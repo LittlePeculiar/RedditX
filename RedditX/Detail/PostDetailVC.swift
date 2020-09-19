@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import WebKit
+
 
 class PostDetailVC: UIViewController {
     
+    @IBOutlet weak var webView: WKWebView!
+    
     // MARK: Properties
     private let viewModel: PostDetailVMContract
+    var activityView = UIActivityIndicatorView(style: .large)
+
 
     // MARK: Init
     init(viewModel: PostDetailVMContract) {
@@ -26,18 +32,40 @@ class PostDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        webView.navigationDelegate = self
         setupUI()
     }
 
     // MARK: methods
 
     private func setupUI() {
+        self.title = viewModel.title
         
-        updateUI()
+        activityView.center = self.view.center
+        self.view.addSubview(activityView)
+        
+        if let url = viewModel.redditURL {
+            activityView.startAnimating()
+            webView.load(URLRequest(url: url))
+            webView.allowsBackForwardNavigationGestures = true
+        } else {
+            let alert = UIAlertController(title: "Error loading Web View", message: "You will be returned to Home View", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] action in
+                self?.goBack()
+            }))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    private func goBack() {
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 
-    private func updateUI() {
-        
-    }
+}
 
+extension PostDetailVC: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityView.stopAnimating()
+    }
 }

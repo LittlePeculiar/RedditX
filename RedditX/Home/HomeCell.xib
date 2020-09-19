@@ -28,13 +28,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYm-Wc-wUj">
-                                <rect key="frame" x="60" y="5" width="251" height="21"/>
+                                <rect key="frame" x="65" y="5" width="246" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STZ-EC-7xo">
-                                <rect key="frame" x="60" y="31" width="251" height="45"/>
+                                <rect key="frame" x="65" y="31" width="246" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -43,15 +43,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="MYm-Wc-wUj" secondAttribute="trailing" constant="5" id="D2k-O0-K1a"/>
+                            <constraint firstItem="STZ-EC-7xo" firstAttribute="trailing" secondItem="MYm-Wc-wUj" secondAttribute="trailing" id="GxW-Wk-hbf"/>
                             <constraint firstItem="STZ-EC-7xo" firstAttribute="leading" secondItem="MYm-Wc-wUj" secondAttribute="leading" id="KDs-6v-pq1"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="KTF-Ua-kRw"/>
                             <constraint firstItem="Lfc-06-wxW" firstAttribute="leading" secondItem="4De-T0-dNY" secondAttribute="leading" constant="5" id="Qv6-PY-JfQ"/>
-                            <constraint firstItem="MYm-Wc-wUj" firstAttribute="leading" secondItem="Lfc-06-wxW" secondAttribute="trailing" constant="5" id="ZWR-Zf-gwr"/>
+                            <constraint firstItem="MYm-Wc-wUj" firstAttribute="leading" secondItem="Lfc-06-wxW" secondAttribute="trailing" constant="10" id="ZWR-Zf-gwr"/>
                             <constraint firstItem="STZ-EC-7xo" firstAttribute="top" secondItem="MYm-Wc-wUj" secondAttribute="bottom" constant="5" id="e9W-6v-Mhs"/>
                             <constraint firstAttribute="bottom" secondItem="STZ-EC-7xo" secondAttribute="bottom" constant="5" id="se1-Wa-Lyg"/>
                             <constraint firstItem="MYm-Wc-wUj" firstAttribute="top" secondItem="Lfc-06-wxW" secondAttribute="top" id="stO-fd-xzA"/>
                             <constraint firstItem="Lfc-06-wxW" firstAttribute="top" secondItem="4De-T0-dNY" secondAttribute="top" constant="5" id="uux-HZ-nis"/>
-                            <constraint firstAttribute="trailing" secondItem="STZ-EC-7xo" secondAttribute="trailing" constant="5" id="vGL-zE-Yjk"/>
                         </constraints>
                     </view>
                 </subviews>

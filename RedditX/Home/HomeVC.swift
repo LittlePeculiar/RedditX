@@ -12,7 +12,6 @@ class HomeVC: UIViewController {
     // MARK: Properties
     fileprivate var viewModel: HomeVMContract
     @IBOutlet private var tableView: UITableView!
-    @IBOutlet private var recentTableView: UITableView!
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var postButton: UIButton!
     @IBOutlet private var recentButton: UIButton!

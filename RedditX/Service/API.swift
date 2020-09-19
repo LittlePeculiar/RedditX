@@ -44,12 +44,12 @@ class API: APIContract {
                 completion(.failure(.noData))
                 return
             }
-            guard let redditContainer = try? JSONDecoder().decode(RedditContainer.self, from: postData) else {
+            guard let container = try? JSONDecoder().decode(Children.self, from: postData) else {
                     completion(.failure(.serializationError))
                     return
             }
-            
-            completion(.success(redditContainer.redditPosts))
+            print(container.children)
+            completion(.success(container.children))
             
         }.resume()
     }

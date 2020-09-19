@@ -48,8 +48,10 @@ class HomeVC: UIViewController {
 
         // add weak self to avoid retain cycle
         viewModel.redditPostDidChangeClosure {[weak self] in
-            self?.isEditing = false
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.isEditing = false
+                self?.tableView.reloadData()
+            }
         }
     }
     

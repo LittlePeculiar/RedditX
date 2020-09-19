@@ -7,11 +7,20 @@
 
 import UIKit
 
-struct RedditContainer: Decodable {
-    let redditPosts: [Reddit]
-    
-    enum CodingKeys: String, CodingKey {
-        case redditPosts = "data"
+private struct RedditContainer: Decodable {
+    struct Data: Decodable {
+        var children: [Reddit]
+    }
+
+    var data: Data
+}
+
+struct Children: Decodable {
+    var children: [Reddit]
+
+    init(from decoder: Decoder) throws {
+        let rawResponse = try RedditContainer(from: decoder)
+        children = rawResponse.data.children
     }
 }
 

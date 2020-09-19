@@ -19,8 +19,8 @@ struct Children: Decodable {
     var children: [Reddit]
 
     init(from decoder: Decoder) throws {
-        let rawResponse = try RedditContainer(from: decoder)
-        children = rawResponse.data.children
+        let container = try RedditContainer(from: decoder)
+        children = container.data.children
     }
 }
 

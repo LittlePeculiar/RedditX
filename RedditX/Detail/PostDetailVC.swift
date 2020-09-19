@@ -49,8 +49,7 @@ class PostDetailVC: UIViewController {
             webView.load(URLRequest(url: url))
             webView.allowsBackForwardNavigationGestures = true
         } else {
-            let alert = UIAlertController(title: "Error loading Web View", message: "You will be returned to Home View", preferredStyle: .alert)
-
+            let alert = UIAlertController(title: viewModel.alertTitle, message: viewModel.alertMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] action in
                 self?.goBack()
             }))
@@ -59,7 +58,7 @@ class PostDetailVC: UIViewController {
     }
     
     private func goBack() {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
 }

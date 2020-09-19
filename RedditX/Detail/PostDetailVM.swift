@@ -10,6 +10,8 @@ import UIKit
 protocol PostDetailVMContract {
     var redditURL: URL? { get }
     var title: String { get }
+    var alertTitle: String { get }
+    var alertMessage: String { get }
 }
 
 class PostDetailVM: PostDetailVMContract {
@@ -20,6 +22,13 @@ class PostDetailVM: PostDetailVMContract {
     
     public var title: String {
         return "Details"
+    }
+    
+    public var alertTitle: String {
+        return "Error loading Web View"
+    }
+    var alertMessage: String {
+        return "You will be returned to Home View"
     }
     
     // MARK: Init

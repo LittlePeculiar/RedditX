@@ -14,9 +14,9 @@ enum SearchType {
 
 protocol HomeVMContract {
     var redditPosts: [Reddit] { get set }
-    var redditRecent: [Reddit] { get set }
-    var searchString: String { get set }
+    var redditRecent: [String] { get set }
     var searchType: SearchType { get set }
+    var searchString: String { get set }
     var title: String { get }
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void
@@ -33,22 +33,14 @@ class HomeVM: HomeVMContract {
         }
     }
     
-    public var redditRecent: [Reddit] = [] {
-        didSet {
-            redditPostsDidChange?()
-        }
-    }
-    
-    public var searchString: String = "" {
-        didSet {
-            fetchRedditPosts(subreddit: searchString)
-        }
-    }
-    
     public var searchType: SearchType = .post {
         didSet {
-            let search = searchType == .post ? "" : searchString
-            fetchRedditPosts(subreddit: search)
+            fetchRedditPosts(subreddit: searchString)
+            if searchType == .recent {
+                if !redditRecent.contains(searchString) {
+                    redditRecent.append(searchString)
+                }
+            }
         }
     }
     
@@ -56,15 +48,20 @@ class HomeVM: HomeVMContract {
         return "Reddit"
     }
     
+    public var redditRecent: [String] = []
+    public var searchString: String = "" 
+    
     private var redditPostsDidChange: (() -> Void)?
     private var api: APIContract
+    
+    // MARK: Methods
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void {
         redditPostsDidChange = callback
     }
     
-    func fetchRedditPosts(subreddit sub: String) {
-        api.fetchRedditPosts(subreddit: "") { (results) in
+    func fetchRedditPosts(subreddit sub: String = "") {
+        api.fetchRedditPosts(subreddit: sub) { (results) in
             switch results {
             case .failure(_):
                 print("An error occured while fetching top reddit posts.")
@@ -72,7 +69,6 @@ class HomeVM: HomeVMContract {
                 self.redditPosts = posts
             }
         }
-        
     }
     
     

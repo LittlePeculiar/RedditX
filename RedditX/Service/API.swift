@@ -29,10 +29,11 @@ class API: APIContract {
     
     func fetchRedditPosts(subreddit sub: String, completion: @escaping (Result<[Reddit], FetchError>) -> Void) {
         let postURLString = sub.isEmpty ? Constants.postURL : "/r/\(sub)" + Constants.postURL
-        guard let url = URL(string: postURLString) else {
+        guard let url = URL(string: Constants.baseURL + postURLString) else {
             completion(.failure(.invalidUrl))
             return
         }
+        print(url)
         
         session.dataTask(with: url) { (data, response, error) in
             guard error == nil else {

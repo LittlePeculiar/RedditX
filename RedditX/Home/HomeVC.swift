@@ -9,13 +9,16 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    
     // MARK: Properties
     fileprivate var viewModel: HomeVMContract
     @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var recentTableView: UITableView!
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var postButton: UIButton!
     @IBOutlet private var recentButton: UIButton!
-    @IBOutlet weak var underlineCenterConstraint: NSLayoutConstraint!
+    @IBOutlet private var underLine: UIView!
+    
     
     // MARK: Init
     init(viewModel: HomeVMContract) {
@@ -33,7 +36,7 @@ class HomeVC: UIViewController {
         
         self.title = viewModel.title
         
-        let refresh = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshPosts(subreddit:)))
+        let refresh = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(loadPosts))
         navigationItem.rightBarButtonItems = [refresh]
         
         tableView.tableFooterView = UIView.init(frame: .zero)
@@ -50,29 +53,53 @@ class HomeVC: UIViewController {
         }
     }
     
+    // MARK: Helper methods
+    
+    @objc func loadPosts() {
+        viewModel.searchString = ""
+        viewModel.searchType = .post
+        moveUnderline()
+        clearSearchText()
+    }
+    
+    func loadRecents() {
+        viewModel.searchType = .recent
+        moveUnderline()
+    }
+    
     func moveUnderline() {
-        UIView.animate(withDuration: 0.1) { [weak self] in
-            if let posX = self?.viewModel.searchType == .post ? self?.postButton.center.x : self?.recentButton.center.x {
-                self?.underlineCenterConstraint.constant = posX
+        let postButtonX = postButton.center.x
+        let postButtonY = postButton.frame.height + 10
+        let recentButtonX = recentButton.center.x
+        let recentButtonY = recentButton.frame.height + 10
+        
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            
+            var center: CGPoint = CGPoint.zero
+            if self?.viewModel.searchType == .post {
+                center = CGPoint(x: postButtonX, y: postButtonY)
+            } else {
+                center = CGPoint(x: recentButtonX, y: recentButtonY)
             }
+            self?.underLine.center = center
         }
+    }
+    
+    func clearSearchText() {
+        textField.text = ""
+        self.isEditing = false
     }
     
     // MARK: Actions
     
-    @objc func refreshPosts(subreddit sub: String = "") {
-        viewModel.fetchRedditPosts(subreddit: sub)
-        textField.resignFirstResponder()
-    }
-    
     @IBAction func postButtonTapped(_ sender: Any) {
-        viewModel.searchType = .post
-        moveUnderline()
+        loadPosts()
     }
     
     @IBAction func recentButtonTapped(_ sender: Any) {
-        viewModel.searchType = .recent
-        moveUnderline()
+        if !viewModel.redditRecent.isEmpty {
+            loadRecents()
+        }
     }
 }
 
@@ -107,13 +134,14 @@ extension HomeVC: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         // reset
-        textField.text = ""
+        clearSearchText()
         return true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text, !text.isEmpty else { return false }
-        refreshPosts(subreddit: text)
+        viewModel.searchString = text
+        loadRecents()
         return true
     }
 }

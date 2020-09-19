@@ -15,13 +15,12 @@ enum SearchType {
 protocol HomeVMContract {
     var redditPosts: [Reddit] { get set }
     var redditRecent: [Reddit] { get set }
-    var searchType: SearchType { get set }
     var searchString: String { get set }
+    var searchType: SearchType { get set }
     var title: String { get }
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void
     func fetchRedditPosts(subreddit: String)
-    func fetchImage(URL url: URL) -> UIImage?
 }
 
 class HomeVM: HomeVMContract {
@@ -76,10 +75,6 @@ class HomeVM: HomeVMContract {
         
     }
     
-    func fetchImage(URL url: URL) -> UIImage? {
-        guard let imageData = try? Data(contentsOf: url) else { return nil }
-        return UIImage(data: imageData)
-    }
     
     // MARK: Init
     

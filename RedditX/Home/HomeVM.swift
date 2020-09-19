@@ -37,11 +37,8 @@ class HomeVM: HomeVMContract {
         didSet {
             var search = ""
             if searchType == .recent {
-                guard searchString.isEmpty == false else { return }
+                guard !searchString.isEmpty else { return }
                 search = searchString
-                if !redditRecent.contains(searchString) {
-                    redditRecent.append(searchString)
-                }
             }
             fetchRedditPosts(subreddit: search)
         }
@@ -64,12 +61,20 @@ class HomeVM: HomeVMContract {
     }
     
     func fetchRedditPosts(subreddit sub: String = "") {
-        api.fetchRedditPosts(subreddit: sub) { (results) in
+        api.fetchRedditPosts(subreddit: sub) { [weak self](results) in
             switch results {
             case .failure(_):
-                print("An error occured while fetching top reddit posts.")
+                print("An error occured while fetching reddit posts.")
             case .success(let posts):
-                self.redditPosts = posts
+                self?.redditPosts = posts
+                
+                // save the searchString if results
+                guard !posts.isEmpty else { return }
+                guard self?.searchType == .recent else { return }
+                guard let search = self?.searchString, !search.isEmpty else { return }
+                if self?.redditRecent.contains(search) == false {
+                    self?.redditRecent.append(search)
+                }
             }
         }
     }

@@ -11,13 +11,15 @@ class HomeVC: UIViewController {
     
     // MARK: Properties
     fileprivate var viewModel: HomeVMContract
+    
     @IBOutlet private var tableView: UITableView!
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var postButton: UIButton!
     @IBOutlet private var recentButton: UIButton!
     @IBOutlet private var underLine: UIView!
     
-    var activityView = UIActivityIndicatorView(style: .large)
+    private var activityView = UIActivityIndicatorView(style: .large)
+    private var menuCenter: MenuCenter? = nil
     
     
     // MARK: Init
@@ -50,6 +52,13 @@ class HomeVC: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        guard menuCenter == nil else { return }
+        let startCenter = CGPoint(x: postButton.center.x, y: postButton.frame.height + 10)
+        let endCenter = CGPoint(x: recentButton.center.x, y: recentButton.frame.height + 10)
+        menuCenter = MenuCenter(startCenter: startCenter, endCenter: endCenter)
+    }
+    
     // MARK: Helper methods
     
     @objc func loadPosts() {
@@ -67,18 +76,14 @@ class HomeVC: UIViewController {
     }
     
     func moveUnderline() {
-        let postButtonX = postButton.center.x
-        let postButtonY = postButton.frame.height + 10
-        let recentButtonX = recentButton.center.x
-        let recentButtonY = recentButton.frame.height + 10
+        guard let menuCenter = self.menuCenter else { return }
         
         UIView.animate(withDuration: 0.3) { [weak self] in
-            
             var center: CGPoint = CGPoint.zero
             if self?.viewModel.searchType == .post {
-                center = CGPoint(x: postButtonX, y: postButtonY)
+                center = menuCenter.startCenter
             } else {
-                center = CGPoint(x: recentButtonX, y: recentButtonY)
+                center = menuCenter.endCenter
             }
             self?.underLine.center = center
         }

@@ -47,7 +47,6 @@ class API: APIContract {
                     completion(.failure(.serializationError))
                     return
             }
-            print(container.children)
             completion(.success(container.children))
             
         }.resume()

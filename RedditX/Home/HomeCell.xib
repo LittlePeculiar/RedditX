@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4De-T0-dNY">
                         <rect key="frame" x="2" y="2" width="316" height="81"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lfc-06-wxW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redditIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Lfc-06-wxW">
                                 <rect key="frame" x="5" y="5" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="U0G-Px-rze"/>
@@ -73,6 +73,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="redditIcon" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

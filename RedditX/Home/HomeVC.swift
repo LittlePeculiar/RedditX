@@ -9,7 +9,6 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    
     // MARK: Properties
     fileprivate var viewModel: HomeVMContract
     @IBOutlet private var tableView: UITableView!
@@ -18,6 +17,8 @@ class HomeVC: UIViewController {
     @IBOutlet private var postButton: UIButton!
     @IBOutlet private var recentButton: UIButton!
     @IBOutlet private var underLine: UIView!
+    
+    var activityView = UIActivityIndicatorView(style: .large)
     
     
     // MARK: Init
@@ -34,23 +35,18 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = viewModel.title
-        
-        let refresh = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(loadPosts))
-        navigationItem.rightBarButtonItems = [refresh]
-        
-        tableView.tableFooterView = UIView.init(frame: .zero)
-        tableView.register(UINib.init(nibName: HomeCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: HomeCell.reuseIdentifier)
+        // setup components
+        setupUI()
 
-        // make row height dynamic
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 75
-
-        // add weak self to avoid retain cycle
+        // start the activity indicator for data loading at start up
+        activityView.startAnimating()
+        
+        // closure called when ever data changes
         viewModel.redditPostDidChangeClosure {[weak self] in
             DispatchQueue.main.async {
-                self?.isEditing = false
+                self?.textField.resignFirstResponder()
                 self?.tableView.reloadData()
+                self?.activityView.stopAnimating()
             }
         }
     }
@@ -58,13 +54,15 @@ class HomeVC: UIViewController {
     // MARK: Helper methods
     
     @objc func loadPosts() {
-        viewModel.searchString = ""
+        activityView.startAnimating()
         viewModel.searchType = .post
         moveUnderline()
         clearSearchText()
     }
     
     func loadRecents() {
+        textField.resignFirstResponder()
+        activityView.startAnimating()
         viewModel.searchType = .recent
         moveUnderline()
     }
@@ -89,7 +87,24 @@ class HomeVC: UIViewController {
     
     func clearSearchText() {
         textField.text = ""
-        self.isEditing = false
+        textField.resignFirstResponder()
+    }
+    
+    func setupUI() {
+        self.title = viewModel.title
+        
+        let refresh = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(loadPosts))
+        navigationItem.rightBarButtonItems = [refresh]
+        
+        tableView.tableFooterView = UIView.init(frame: .zero)
+        tableView.register(UINib.init(nibName: HomeCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: HomeCell.reuseIdentifier)
+
+        // make row height dynamic
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 75
+        
+        activityView.center = self.view.center
+        self.view.addSubview(activityView)
     }
     
     // MARK: Actions

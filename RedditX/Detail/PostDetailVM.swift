@@ -24,7 +24,7 @@ class PostDetailVM: PostDetailVMContract {
     var permalink: String { return reddit.permalink }
     var thumbnail: String { return reddit.thumbnail }
     
-    var authorProfilePhoto: UIImage? {
+    var thumbnailPhoto: UIImage? {
         guard
             let imageUrl = reddit.thumbnailImageUrl,
             let imageData = try? Data(contentsOf: imageUrl)

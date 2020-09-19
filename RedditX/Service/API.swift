@@ -33,7 +33,6 @@ class API: APIContract {
             completion(.failure(.invalidUrl))
             return
         }
-        print(url)
         
         session.dataTask(with: url) { (data, response, error) in
             guard error == nil else {

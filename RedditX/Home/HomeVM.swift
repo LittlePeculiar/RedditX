@@ -35,15 +35,15 @@ class HomeVM: HomeVMContract {
     
     public var searchType: SearchType = .post {
         didSet {
+            var search = ""
             if searchType == .recent {
                 guard searchString.isEmpty == false else { return }
-                fetchRedditPosts(subreddit: searchString)
+                search = searchString
                 if !redditRecent.contains(searchString) {
                     redditRecent.append(searchString)
                 }
-            } else {
-                fetchRedditPosts(subreddit: "")
             }
+            fetchRedditPosts(subreddit: search)
         }
     }
     

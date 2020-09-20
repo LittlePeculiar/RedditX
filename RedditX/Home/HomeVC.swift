@@ -57,21 +57,21 @@ class HomeVC: UIViewController {
     
     // MARK: Helper methods
     
-    @objc func loadPosts() {
+    @objc private func loadPosts() {
         activityView.startAnimating()
         viewModel.searchType = .post
         moveUnderline()
         clearSearchText()
     }
     
-    func loadRecents() {
+    private func loadRecents() {
         textField.resignFirstResponder()
         activityView.startAnimating()
         viewModel.searchType = .recent
         moveUnderline()
     }
     
-    func moveUnderline() {
+    private func moveUnderline() {
         // setup the struct if first time here
         if self.menuCenter == nil {
             let startCenter = CGPoint(x: postButton.center.x, y: postButton.frame.height + 10)
@@ -91,7 +91,7 @@ class HomeVC: UIViewController {
         }
     }
     
-    func validate() {
+    private func validate() {
         // for whatever reason no posts received, show alert
         if viewModel.redditPosts.isEmpty == true {
             activityView.stopAnimating()
@@ -99,18 +99,18 @@ class HomeVC: UIViewController {
         }
     }
     
-    func showAlert(withTitle title: String, andMessage message: String) {
+    private func showAlert(withTitle title: String, andMessage message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
     
-    func clearSearchText() {
+    private func clearSearchText() {
         textField.text = ""
         textField.resignFirstResponder()
     }
     
-    func setupUI() {
+    private func setupUI() {
         self.title = viewModel.title
         
         let refresh = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(loadPosts))
@@ -126,6 +126,14 @@ class HomeVC: UIViewController {
         activityView.center = self.view.center
         self.view.addSubview(activityView)
         activityView.startAnimating()
+    }
+    
+    func refresh() {
+        if viewModel.searchType == .post {
+            loadPosts()
+        } else {
+            loadRecents()
+        }
     }
     
     // MARK: Actions

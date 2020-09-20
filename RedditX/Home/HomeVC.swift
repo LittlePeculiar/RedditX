@@ -38,9 +38,6 @@ class HomeVC: UIViewController {
         
         // setup components
         setupUI()
-
-        // start the activity indicator for data loading at start up
-        activityView.startAnimating()
         
         // closure called when ever data changes
         viewModel.redditPostDidChangeClosure {[weak self] in
@@ -48,7 +45,13 @@ class HomeVC: UIViewController {
                 self?.textField.resignFirstResponder()
                 self?.tableView.reloadData()
                 self?.activityView.stopAnimating()
+                self?.validate()
             }
+        }
+        
+        // check for data after attempting to fetch
+        if viewModel.isLoading == false {
+            validate()
         }
     }
     
@@ -79,10 +82,27 @@ class HomeVC: UIViewController {
         // animate the underline bar
         guard let menuCenter = self.menuCenter else { return }
         let searchType = self.viewModel.searchType
-        UIView.animate(withDuration: 0.5) { [weak self] in
-            let center: CGPoint = searchType == .post ? menuCenter.startCenter : menuCenter.endCenter
-            self?.underLine.center = center
+        let center: CGPoint = searchType == .post ? menuCenter.startCenter : menuCenter.endCenter
+        
+        UIView.animate(withDuration: 1.0) { [weak self] in
+            DispatchQueue.main.async {
+                self?.underLine.center = center
+            }
         }
+    }
+    
+    func validate() {
+        // for whatever reason no posts received, show alert
+        if viewModel.redditPosts.isEmpty == true {
+            activityView.stopAnimating()
+            showAlert(withTitle: viewModel.alertLoadTitle, andMessage: viewModel.alertLoadMessage)
+        }
+    }
+    
+    func showAlert(withTitle title: String, andMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
     
     func clearSearchText() {
@@ -105,6 +125,7 @@ class HomeVC: UIViewController {
         
         activityView.center = self.view.center
         self.view.addSubview(activityView)
+        activityView.startAnimating()
     }
     
     // MARK: Actions

@@ -18,6 +18,9 @@ protocol HomeVMContract {
     var searchType: SearchType { get set }
     var searchString: String { get set }
     var title: String { get }
+    var alertLoadTitle: String { get }
+    var alertLoadMessage: String { get }
+    var isLoading: Bool { get }
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void
     func fetchRedditPosts(subreddit: String)
@@ -48,8 +51,16 @@ class HomeVM: HomeVMContract {
         return "Reddit"
     }
     
+    public var alertLoadTitle: String {
+        return "Error loading Reddit Posts"
+    }
+    var alertLoadMessage: String {
+        return "Unable to retrieve Reddit Posts.\nPlease check your input or internet connection and try again."
+    }
+    
     public var redditRecent: [String] = []
-    public var searchString: String = "" 
+    public var searchString: String = ""
+    public var isLoading: Bool = false
     
     private var redditPostsDidChange: (() -> Void)?
     private var api: APIContract
@@ -61,10 +72,12 @@ class HomeVM: HomeVMContract {
     }
     
     func fetchRedditPosts(subreddit sub: String = "") {
+        isLoading = true
         api.fetchRedditPosts(subreddit: sub) { [weak self](results) in
             switch results {
             case .failure(_):
                 print("An error occured while fetching reddit posts.")
+                self?.redditPosts.removeAll()
             case .success(let posts):
                 self?.redditPosts = posts
                 
@@ -74,6 +87,7 @@ class HomeVM: HomeVMContract {
                 guard let search = self?.searchString, !search.isEmpty else { return }
                 self?.updateRecent(searchString: search)
             }
+            self?.isLoading = false
         }
     }
     

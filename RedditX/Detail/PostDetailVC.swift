@@ -15,7 +15,7 @@ class PostDetailVC: UIViewController {
     
     // MARK: Properties
     private let viewModel: PostDetailVMContract
-    var activityView = UIActivityIndicatorView(style: .gray)
+    private var activityView = UIActivityIndicatorView()
 
 
     // MARK: Init
@@ -42,7 +42,8 @@ class PostDetailVC: UIViewController {
         self.title = viewModel.title
         
         // todo :: make this a custom view
-        activityView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        let size = UIDevice.current.userInterfaceIdiom == .phone ? 40.0 : 80.0
+        activityView.frame = CGRect(x: 0, y: 0, width: size, height: size)
         activityView.center = self.parent?.view.center ?? self.view.center
         activityView.hidesWhenStopped = true
         activityView.style = .whiteLarge

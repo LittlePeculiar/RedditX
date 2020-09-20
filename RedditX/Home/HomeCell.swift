@@ -24,7 +24,7 @@ class HomeCell: UITableViewCell {
         subredditLabel.text = ""
         thumbnailImageView.layer.cornerRadius = 5.0
         thumbnailImageView.clipsToBounds = true
-
+        thumbnailImageView.accessibilityLabel = "HomeCellThumbnail"
     }
     
     func configure(with post: Reddit) {

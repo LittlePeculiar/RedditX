@@ -20,8 +20,7 @@ extension UIImageView {
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
                 guard let imageData = data else { return }
-                let image = UIImage(data: imageData)
-                self.image = image
+                self.image = UIImage(data: imageData)
             }
         }.resume()
     }

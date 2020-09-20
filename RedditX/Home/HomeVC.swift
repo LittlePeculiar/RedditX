@@ -154,7 +154,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 extension HomeVC: UITextFieldDelegate {
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        // reset
         clearSearchText()
         return true
     }

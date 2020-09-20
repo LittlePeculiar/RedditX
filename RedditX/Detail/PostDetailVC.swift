@@ -43,7 +43,7 @@ class PostDetailVC: UIViewController {
         
         // todo :: make this a custom view
         activityView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityView.center = self.view.center
+        activityView.center = self.parent?.view.center ?? self.view.center
         activityView.hidesWhenStopped = true
         activityView.style = .whiteLarge
         activityView.color = UIColor.redditOrange()

@@ -18,7 +18,7 @@ class HomeVC: UIViewController {
     @IBOutlet private var recentButton: UIButton!
     @IBOutlet private var underLine: UIView!
     
-    private var activityView = UIActivityIndicatorView(style: .large)
+    private var activityView = UIActivityIndicatorView()
     private var menuCenter: MenuCenter? = nil
     
     
@@ -123,7 +123,11 @@ class HomeVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 75
         
+        activityView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         activityView.center = self.view.center
+        activityView.hidesWhenStopped = true
+        activityView.style = .whiteLarge
+        activityView.color = UIColor.redditOrange()
         self.view.addSubview(activityView)
         activityView.startAnimating()
     }

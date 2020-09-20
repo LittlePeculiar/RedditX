@@ -15,7 +15,7 @@ class PostDetailVC: UIViewController {
     
     // MARK: Properties
     private let viewModel: PostDetailVMContract
-    var activityView = UIActivityIndicatorView(style: .large)
+    var activityView = UIActivityIndicatorView(style: .gray)
 
 
     // MARK: Init
@@ -41,8 +41,14 @@ class PostDetailVC: UIViewController {
     private func setupUI() {
         self.title = viewModel.title
         
+        // todo :: make this a custom view
+        activityView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         activityView.center = self.view.center
+        activityView.hidesWhenStopped = true
+        activityView.style = .whiteLarge
+        activityView.color = UIColor.redditOrange()
         self.view.addSubview(activityView)
+        activityView.startAnimating()
         
         if let url = viewModel.redditURL {
             activityView.startAnimating()

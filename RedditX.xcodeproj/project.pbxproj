@@ -26,6 +26,8 @@
 		A08AB79C25169A8F00505F5C /* MenuCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08AB79B25169A8F00505F5C /* MenuCenter.swift */; };
 		A08AB7AE2516B7E800505F5C /* DetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08AB7AD2516B7E800505F5C /* DetailTests.swift */; };
 		A08AB7D42516C1DF00505F5C /* Reddit.json in Resources */ = {isa = PBXBuildFile; fileRef = A08AB7D32516C1DF00505F5C /* Reddit.json */; };
+		A0F87B8A2517FDAC00E1C859 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F87B892517FDAC00E1C859 /* WebKit.framework */; };
+		A0F87B922518002500E1C859 /* GMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F87B912518002500E1C859 /* GMColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		A08AB79B25169A8F00505F5C /* MenuCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCenter.swift; sourceTree = "<group>"; };
 		A08AB7AD2516B7E800505F5C /* DetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTests.swift; sourceTree = "<group>"; };
 		A08AB7D32516C1DF00505F5C /* Reddit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Reddit.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		A0F87B892517FDAC00E1C859 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A0F87B912518002500E1C859 /* GMColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F87B8A2517FDAC00E1C859 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +110,7 @@
 				A05B993B25152DDD0099B9A5 /* RedditXTests */,
 				A05B994625152DDD0099B9A5 /* RedditXUITests */,
 				A05B992325152DDC0099B9A5 /* Products */,
+				A0F87B882517FDAC00E1C859 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -197,8 +203,17 @@
 			isa = PBXGroup;
 			children = (
 				A05B99D325156EEC0099B9A5 /* GMImageView.swift */,
+				A0F87B912518002500E1C859 /* GMColor.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A0F87B882517FDAC00E1C859 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0F87B892517FDAC00E1C859 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A05B992625152DDC0099B9A5 /* AppDelegate.swift in Sources */,
+				A0F87B922518002500E1C859 /* GMColor.swift in Sources */,
 				A08AB79C25169A8F00505F5C /* MenuCenter.swift in Sources */,
 				A05B997F251530060099B9A5 /* PostDetailVC.swift in Sources */,
 				A05B997625152FDF0099B9A5 /* PostDetailVM.swift in Sources */,
@@ -442,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -497,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

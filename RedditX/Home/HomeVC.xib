@@ -94,7 +94,7 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="2lg-eL-UMg"/>
-                        <constraint firstItem="OpK-o3-m4U" firstAttribute="centerX" secondItem="6Ja-qj-cLR" secondAttribute="centerX" multiplier="0.5" id="SGi-of-fC6"/>
+                        <constraint firstItem="38D-hd-3Qy" firstAttribute="centerX" secondItem="OpK-o3-m4U" secondAttribute="centerX" id="JEc-wd-gam"/>
                         <constraint firstItem="A4l-cW-fzE" firstAttribute="centerY" secondItem="38D-hd-3Qy" secondAttribute="centerY" id="U5X-Vq-bpC"/>
                         <constraint firstItem="A4l-cW-fzE" firstAttribute="centerX" secondItem="6Ja-qj-cLR" secondAttribute="centerX" multiplier="1.5" id="Wcf-VN-uRb"/>
                         <constraint firstItem="38D-hd-3Qy" firstAttribute="top" secondItem="6Ja-qj-cLR" secondAttribute="top" constant="5" id="gN4-6X-ONs"/>

@@ -52,13 +52,6 @@ class HomeVC: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        guard menuCenter == nil else { return }
-        let startCenter = CGPoint(x: postButton.center.x, y: postButton.frame.height + 10)
-        let endCenter = CGPoint(x: recentButton.center.x, y: recentButton.frame.height + 10)
-        menuCenter = MenuCenter(startCenter: startCenter, endCenter: endCenter)
-    }
-    
     // MARK: Helper methods
     
     @objc func loadPosts() {
@@ -76,8 +69,15 @@ class HomeVC: UIViewController {
     }
     
     func moveUnderline() {
-        guard let menuCenter = self.menuCenter else { return }
+        // setup the struct if first time here
+        if self.menuCenter == nil {
+            let startCenter = CGPoint(x: postButton.center.x, y: postButton.frame.height + 10)
+            let endCenter = CGPoint(x: recentButton.center.x, y: recentButton.frame.height + 10)
+            self.menuCenter = MenuCenter(startCenter: startCenter, endCenter: endCenter)
+        }
         
+        // animate the underline bar
+        guard let menuCenter = self.menuCenter else { return }
         UIView.animate(withDuration: 0.3) { [weak self] in
             var center: CGPoint = CGPoint.zero
             if self?.viewModel.searchType == .post {

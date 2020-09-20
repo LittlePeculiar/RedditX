@@ -78,13 +78,9 @@ class HomeVC: UIViewController {
         
         // animate the underline bar
         guard let menuCenter = self.menuCenter else { return }
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            var center: CGPoint = CGPoint.zero
-            if self?.viewModel.searchType == .post {
-                center = menuCenter.startCenter
-            } else {
-                center = menuCenter.endCenter
-            }
+        let searchType = self.viewModel.searchType
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            let center: CGPoint = searchType == .post ? menuCenter.startCenter : menuCenter.endCenter
             self?.underLine.center = center
         }
     }

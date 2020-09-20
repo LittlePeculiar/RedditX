@@ -72,10 +72,20 @@ class HomeVM: HomeVMContract {
                 guard !posts.isEmpty else { return }
                 guard self?.searchType == .recent else { return }
                 guard let search = self?.searchString, !search.isEmpty else { return }
-                if self?.redditRecent.contains(search) == false {
-                    self?.redditRecent.append(search)
-                }
+                self?.updateRecent(searchString: search)
             }
+        }
+    }
+    
+    private func updateRecent(searchString: String) {
+        // list by most recent
+        if !redditRecent.contains(searchString) {
+            redditRecent.insert(searchString, at: 0)
+        }
+        
+        // limit list to 5
+        if redditRecent.count > 5 {
+            redditRecent.removeLast()
         }
     }
     

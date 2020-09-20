@@ -55,7 +55,7 @@ struct Reddit: Decodable {
         self.thumbnail = ""
     }
     
-    var thumbnailImageUrl: URL? {
+    var thumbnailURL: URL? {
         return URL(string: thumbnail)
     }
     

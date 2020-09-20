@@ -30,7 +30,7 @@ class HomeCell: UITableViewCell {
     func configure(with post: Reddit) {
         titleLabel.text = post.title
         subredditLabel.text = post.subreddit
-        thumbnailImageView.fetchImage(thumbnailURL: post.thumbnailImageUrl)
+        thumbnailImageView.fetchImage(thumbnailURL: post.thumbnailURL)
     }
     
 }

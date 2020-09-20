@@ -21,7 +21,7 @@ class PostDetailVM: PostDetailVMContract {
     var redditURL: URL? { return reddit.redditURL }
     
     public var title: String {
-        return "Details"
+        return "SubReddit"
     }
     
     public var alertTitle: String {

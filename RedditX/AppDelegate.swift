@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // NOTE:: this fixes a strange bug where the underline bar is reset when coming from background
         // not a permanent fix. still investigating - possible causes:
-        // 1. snapshot error
+        // 1. related to snapshot error
         // 2. removing SceneDelegate
         
         homeVC.refresh()

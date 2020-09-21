@@ -123,6 +123,7 @@ class HomeVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 75
         
+        // set up the activity indicator
         let size = UIDevice.current.userInterfaceIdiom == .phone ? 40.0 : 80.0
         activityView.frame = CGRect(x: 0, y: 0, width: size, height: size)
         activityView.center = self.parent?.view.center ?? self.view.center

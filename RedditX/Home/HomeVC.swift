@@ -20,6 +20,15 @@ class HomeVC: UIViewController {
     
     private var activityView = UIActivityIndicatorView()
     private var menuCenter: MenuCenter? = nil
+    private var hasRecent: Bool = false {
+        didSet {
+            DispatchQueue.main.async {[weak self] in
+                self?.recentButton.isEnabled = self?.hasRecent == true
+                let color: UIColor = self?.hasRecent == true ? .black : .gray
+                self?.recentButton.setTitleColor(color, for: .normal)
+            }
+        }
+    }
     
     
     // MARK: Init
@@ -47,6 +56,9 @@ class HomeVC: UIViewController {
                 self?.activityView.stopAnimating()
                 self?.validate()
             }
+        }
+        viewModel.redditRecentDidChangeClosure {[weak self] in
+            self?.hasRecent = self?.viewModel.redditRecent.isEmpty == false
         }
         
         // check for data after attempting to fetch
@@ -132,6 +144,9 @@ class HomeVC: UIViewController {
         activityView.color = UIColor.redditOrange()
         self.view.addSubview(activityView)
         activityView.startAnimating()
+        
+        // disable the recent button until we have something
+        hasRecent = false
     }
     
     func refresh() {

@@ -24,6 +24,8 @@ protocol HomeVMContract {
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void
     func fetchRedditPosts(subreddit: String)
+    
+    func redditRecentDidChangeClosure(callback: @escaping () -> Void) -> Void
 }
 
 class HomeVM: HomeVMContract {
@@ -33,6 +35,12 @@ class HomeVM: HomeVMContract {
     public var redditPosts: [Reddit] = [] {
         didSet {
             redditPostsDidChange?()
+        }
+    }
+    
+    public var redditRecent: [String] = [] {
+        didSet {
+            redditRecentDidChange?()
         }
     }
     
@@ -58,17 +66,22 @@ class HomeVM: HomeVMContract {
         return "Unable to retrieve Reddit Posts.\nPlease check your input or internet connection and try again."
     }
     
-    public var redditRecent: [String] = []
+    
     public var searchString: String = ""
     public var isLoading: Bool = false
     
     private var redditPostsDidChange: (() -> Void)?
+    private var redditRecentDidChange: (() -> Void)?
     private var api: APIContract
     
     // MARK: Methods
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void {
         redditPostsDidChange = callback
+    }
+    
+    func redditRecentDidChangeClosure(callback: @escaping () -> Void) -> Void {
+        redditRecentDidChange = callback
     }
     
     func fetchRedditPosts(subreddit sub: String = "") {
@@ -78,8 +91,10 @@ class HomeVM: HomeVMContract {
             case .failure(_):
                 print("An error occured while fetching reddit posts.")
                 self?.redditPosts.removeAll()
+                self?.isLoading = false
             case .success(let posts):
                 self?.redditPosts = posts
+                self?.isLoading = false
                 
                 // save the searchString if results
                 guard !posts.isEmpty else { return }
@@ -87,7 +102,6 @@ class HomeVM: HomeVMContract {
                 guard let search = self?.searchString, !search.isEmpty else { return }
                 self?.updateRecent(searchString: search)
             }
-            self?.isLoading = false
         }
     }
     

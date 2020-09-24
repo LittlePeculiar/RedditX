@@ -12,10 +12,10 @@ import WebKit
 class PostDetailVC: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet private var spinner: Spinner!
     
     // MARK: Properties
     private let viewModel: PostDetailVMContract
-    private var activityView = UIActivityIndicatorView()
 
 
     // MARK: Init
@@ -41,18 +41,8 @@ class PostDetailVC: UIViewController {
     private func setupUI() {
         self.title = viewModel.title
         
-        // todo :: make this a custom view
-        let size = UIDevice.current.userInterfaceIdiom == .phone ? 40.0 : 80.0
-        activityView.frame = CGRect(x: 0, y: 0, width: size, height: size)
-        activityView.center = self.parent?.view.center ?? self.view.center
-        activityView.hidesWhenStopped = true
-        activityView.style = .whiteLarge
-        activityView.color = UIColor.redditOrange()
-        self.view.addSubview(activityView)
-        activityView.startAnimating()
-        
         if let url = viewModel.redditURL {
-            activityView.startAnimating()
+            spinner.startAnimating()
             webView.load(URLRequest(url: url))
             webView.allowsBackForwardNavigationGestures = true
         } else {
@@ -72,6 +62,6 @@ class PostDetailVC: UIViewController {
 
 extension PostDetailVC: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityView.stopAnimating()
+        spinner.stopAnimating()
     }
 }

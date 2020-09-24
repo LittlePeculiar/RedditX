@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,6 +13,7 @@
             <connections>
                 <outlet property="postButton" destination="38D-hd-3Qy" id="e45-rj-ExM"/>
                 <outlet property="recentButton" destination="A4l-cW-fzE" id="bJt-G3-LyY"/>
+                <outlet property="spinner" destination="Cju-P8-1W7" id="9d0-ZM-gEq"/>
                 <outlet property="tableView" destination="x3F-20-WCF" id="Zj3-bj-eu6"/>
                 <outlet property="textField" destination="Y3e-d1-8pG" id="mrr-sW-iPu"/>
                 <outlet property="underLine" destination="OpK-o3-m4U" id="sVM-dG-Ptf"/>
@@ -102,15 +104,42 @@
                         <constraint firstItem="38D-hd-3Qy" firstAttribute="centerX" secondItem="6Ja-qj-cLR" secondAttribute="centerX" multiplier="0.5" id="pXS-Tx-X5B"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cju-P8-1W7" customClass="Spinner" customModule="RedditX" customModuleProvider="target">
+                    <rect key="frame" x="157" y="398" width="100" height="100"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="Fh8-Gu-002"/>
+                        <constraint firstAttribute="width" constant="100" id="QSh-J9-cW7"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="outerFillColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="outerStrokeColor">
+                            <color key="value" red="1" green="0.26274509800000001" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="innerFillColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="innerStrokeColor">
+                            <color key="value" red="1" green="0.26274509800000001" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="labelTextColor">
+                            <color key="value" red="1" green="0.26274509800000001" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="0.26274509800000001" blue="0.0039215686269999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="uyp-3I-5Mq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2qd-od-jMY"/>
+                <constraint firstItem="Cju-P8-1W7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5h1-5F-oun"/>
                 <constraint firstAttribute="trailing" secondItem="6Ja-qj-cLR" secondAttribute="trailing" id="6CH-hA-b5I"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uyp-3I-5Mq" secondAttribute="trailing" id="9wu-un-AME"/>
                 <constraint firstItem="6Ja-qj-cLR" firstAttribute="top" secondItem="uyp-3I-5Mq" secondAttribute="bottom" constant="5" id="C9s-MO-8HZ"/>
                 <constraint firstItem="x3F-20-WCF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CmS-GZ-jh5"/>
+                <constraint firstItem="Cju-P8-1W7" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="UdE-Hm-cHA"/>
                 <constraint firstItem="x3F-20-WCF" firstAttribute="top" secondItem="6Ja-qj-cLR" secondAttribute="bottom" constant="5" id="Zw7-Xq-mFi"/>
                 <constraint firstItem="6Ja-qj-cLR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aCL-HW-AZl"/>
                 <constraint firstItem="uyp-3I-5Mq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="axD-cc-eET"/>

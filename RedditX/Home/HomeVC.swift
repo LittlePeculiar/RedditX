@@ -17,8 +17,8 @@ class HomeVC: UIViewController {
     @IBOutlet private var postButton: UIButton!
     @IBOutlet private var recentButton: UIButton!
     @IBOutlet private var underLine: UIView!
+    @IBOutlet private var spinner: Spinner!
     
-    private var activityView = UIActivityIndicatorView()
     private var menuCenter: MenuCenter? = nil
     private var hasRecent: Bool = false {
         didSet {
@@ -53,7 +53,7 @@ class HomeVC: UIViewController {
             DispatchQueue.main.async {
                 self?.textField.resignFirstResponder()
                 self?.tableView.reloadData()
-                self?.activityView.stopAnimating()
+                self?.spinner.stopAnimating()
                 self?.validate()
             }
         }
@@ -70,7 +70,7 @@ class HomeVC: UIViewController {
     // MARK: Helper methods
     
     @objc private func loadPosts() {
-        activityView.startAnimating()
+        spinner.startAnimating()
         viewModel.searchType = .post
         moveUnderline()
         clearSearchText()
@@ -78,7 +78,7 @@ class HomeVC: UIViewController {
     
     private func loadRecents() {
         textField.resignFirstResponder()
-        activityView.startAnimating()
+        spinner.startAnimating()
         viewModel.searchType = .recent
         moveUnderline()
     }
@@ -106,7 +106,7 @@ class HomeVC: UIViewController {
     private func validate() {
         // for whatever reason no posts received, show alert
         if viewModel.redditPosts.isEmpty == true {
-            activityView.stopAnimating()
+            spinner.stopAnimating()
             showAlert(withTitle: viewModel.alertLoadTitle, andMessage: viewModel.alertLoadMessage)
         }
     }
@@ -134,16 +134,6 @@ class HomeVC: UIViewController {
         // make row height dynamic
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 75
-        
-        // set up the activity indicator
-        let size = UIDevice.current.userInterfaceIdiom == .phone ? 40.0 : 80.0
-        activityView.frame = CGRect(x: 0, y: 0, width: size, height: size)
-        activityView.center = self.parent?.view.center ?? self.view.center
-        activityView.hidesWhenStopped = true
-        activityView.style = .whiteLarge
-        activityView.color = UIColor.redditOrange()
-        self.view.addSubview(activityView)
-        activityView.startAnimating()
         
         // disable the recent button until we have something
         hasRecent = false

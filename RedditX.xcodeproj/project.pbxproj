@@ -26,6 +26,7 @@
 		A08AB79C25169A8F00505F5C /* MenuCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08AB79B25169A8F00505F5C /* MenuCenter.swift */; };
 		A08AB7AE2516B7E800505F5C /* DetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08AB7AD2516B7E800505F5C /* DetailTests.swift */; };
 		A08AB7D42516C1DF00505F5C /* Reddit.json in Resources */ = {isa = PBXBuildFile; fileRef = A08AB7D32516C1DF00505F5C /* Reddit.json */; };
+		A093984D251D2E400050019F /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093984C251D2E400050019F /* Spinner.swift */; };
 		A0F87B8A2517FDAC00E1C859 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0F87B892517FDAC00E1C859 /* WebKit.framework */; };
 		A0F87B922518002500E1C859 /* GMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F87B912518002500E1C859 /* GMColor.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		A08AB79B25169A8F00505F5C /* MenuCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCenter.swift; sourceTree = "<group>"; };
 		A08AB7AD2516B7E800505F5C /* DetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTests.swift; sourceTree = "<group>"; };
 		A08AB7D32516C1DF00505F5C /* Reddit.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Reddit.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		A093984C251D2E400050019F /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		A0F87B892517FDAC00E1C859 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A0F87B912518002500E1C859 /* GMColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 		A05B992425152DDC0099B9A5 /* RedditX */ = {
 			isa = PBXGroup;
 			children = (
+				A093984B251D2E2A0050019F /* Views */,
 				A05B99C2251569660099B9A5 /* Extensions */,
 				A05B99B825153FC10099B9A5 /* Models */,
 				A05B995D25152ECE0099B9A5 /* Service */,
@@ -206,6 +209,14 @@
 				A0F87B912518002500E1C859 /* GMColor.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A093984B251D2E2A0050019F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A093984C251D2E400050019F /* Spinner.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A0F87B882517FDAC00E1C859 /* Frameworks */ = {
@@ -354,6 +365,7 @@
 				A08AB79C25169A8F00505F5C /* MenuCenter.swift in Sources */,
 				A05B997F251530060099B9A5 /* PostDetailVC.swift in Sources */,
 				A05B997625152FDF0099B9A5 /* PostDetailVM.swift in Sources */,
+				A093984D251D2E400050019F /* Spinner.swift in Sources */,
 				A05B99BA25153FD10099B9A5 /* Reddit.swift in Sources */,
 				A05B996A25152F560099B9A5 /* HomeCell.swift in Sources */,
 				A05B996025152F260099B9A5 /* HomeVC.swift in Sources */,

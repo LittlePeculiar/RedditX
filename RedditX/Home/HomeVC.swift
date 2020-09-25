@@ -65,9 +65,17 @@ class HomeVC: UIViewController {
         if viewModel.isLoading == false {
             validate()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     // MARK: Helper methods
+    
+    @objc private func handleRotate() {
+        // rebuild the menu position and load
+        menuCenter = nil
+        refresh()
+    }
     
     @objc private func loadPosts() {
         spinner.startAnimating()
@@ -83,7 +91,7 @@ class HomeVC: UIViewController {
         moveUnderline()
     }
     
-    private func moveUnderline() {
+    @objc private func moveUnderline() {
         // setup the struct if first time here
         if self.menuCenter == nil {
             let startCenter = CGPoint(x: postButton.center.x, y: postButton.frame.height + 10)
@@ -140,6 +148,7 @@ class HomeVC: UIViewController {
     }
     
     func refresh() {
+        self.view.layoutIfNeeded()
         if viewModel.searchType == .post {
             loadPosts()
         } else {

@@ -24,7 +24,7 @@ class HomeVC: UIViewController {
         didSet {
             DispatchQueue.main.async {[weak self] in
                 self?.recentButton.isEnabled = self?.hasRecent == true
-                let color: UIColor = self?.hasRecent == true ? .black : .gray
+                let color: UIColor = self?.hasRecent == true ? .black : .lightGray
                 self?.recentButton.setTitleColor(color, for: .normal)
             }
         }
@@ -73,6 +73,8 @@ class HomeVC: UIViewController {
     
     @objc private func handleRotate() {
         // rebuild the menu position and load
+        guard UIDevice.current.userInterfaceIdiom == .pad else { return }
+        guard viewModel.searchType == .recent else { return }
         menuCenter = nil
         refresh()
     }

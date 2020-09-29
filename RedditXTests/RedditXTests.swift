@@ -57,6 +57,12 @@ class RedditXTests: XCTestCase {
         
         // test api call for all posts
         api.fetchRedditPosts(subreddit: "") {(results) in
+            switch results {
+            case .failure(_):
+                XCTFail("An error occured while fetching reddit posts.")
+            case .success(let posts):
+                XCTAssertFalse(posts.isEmpty)
+            }
             self.wait(for: [self.apiExpectation], timeout: 10.0)
             XCTAssertTrue(self.apiSuccess, "fetch Complete")
         }
@@ -85,7 +91,13 @@ class RedditXTests: XCTestCase {
         }
         
         // test api call for sub posts
-        api.fetchRedditPosts(subreddit: sub) {(results) in
+        api.fetchRedditPosts(subreddit: "") {(results) in
+            switch results {
+            case .failure(_):
+                XCTFail("An error occured while fetching reddit posts.")
+            case .success(let posts):
+                XCTAssertFalse(posts.isEmpty)
+            }
             self.wait(for: [self.apiExpectation], timeout: 10.0)
             XCTAssertTrue(self.apiSuccess, "fetch Complete")
         }

@@ -30,6 +30,24 @@ class RedditXTests: XCTestCase {
         XCTAssertNotNil(detailVC)
     }
 
+    func testDownRedditData() {
+
+        let expectation = XCTestExpectation(description: "Download Reddit Data")
+
+        guard let url = URL(string: "https://www.reddit.com/.json") else {
+            XCTFail("Invalid URL from string https://www.reddit.com/.json")
+            return
+        }
+
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, _, _) in
+            XCTAssertNotNil(data, "No data was downloaded.")
+            expectation.fulfill()
+        }
+
+        dataTask.resume()
+        wait(for: [expectation], timeout: 10.0)
+    }
+
     func testGetRedditPosts() throws {
         let api = API()
         
@@ -39,7 +57,7 @@ class RedditXTests: XCTestCase {
         
         // test api call for all posts
         api.fetchRedditPosts(subreddit: "") {(results) in
-            self.wait(for: [self.apiExpectation], timeout: 60.0)
+            self.wait(for: [self.apiExpectation], timeout: 10.0)
             XCTAssertTrue(self.apiSuccess, "fetch Complete")
         }
     }
@@ -68,7 +86,7 @@ class RedditXTests: XCTestCase {
         
         // test api call for sub posts
         api.fetchRedditPosts(subreddit: sub) {(results) in
-            self.wait(for: [self.apiExpectation], timeout: 60.0)
+            self.wait(for: [self.apiExpectation], timeout: 10.0)
             XCTAssertTrue(self.apiSuccess, "fetch Complete")
         }
     }
@@ -89,6 +107,9 @@ class RedditXTests: XCTestCase {
             return
         }
         XCTAssertFalse(container.children.isEmpty)
+
+        let sub = container.children[0]
+        XCTAssertEqual(sub.subreddit, "FAWSL")
     }
 
 }

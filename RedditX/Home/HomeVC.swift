@@ -69,6 +69,15 @@ class HomeVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleRotate), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && viewModel.isLoading == false {
+            viewModel.fetchRedditPosts(subreddit: viewModel.searchString, loadMore: true)
+        }
+    }
+    
     // MARK: Helper methods
     
     @objc private func handleRotate() {

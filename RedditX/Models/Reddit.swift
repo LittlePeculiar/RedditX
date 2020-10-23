@@ -10,6 +10,7 @@ import UIKit
 private struct RedditContainer: Decodable {
     struct Data: Decodable {
         var children: [Reddit]
+        var after: String
     }
 
     var data: Data
@@ -17,10 +18,12 @@ private struct RedditContainer: Decodable {
 
 struct Children: Decodable {
     var children: [Reddit]
+    var after: String
 
     init(from decoder: Decoder) throws {
         let container = try RedditContainer(from: decoder)
         children = container.data.children
+        after = container.data.after
     }
 }
 

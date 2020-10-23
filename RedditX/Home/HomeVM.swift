@@ -23,9 +23,9 @@ protocol HomeVMContract {
     var isLoading: Bool { get }
     
     func redditPostDidChangeClosure(callback: @escaping () -> Void) -> Void
-    func fetchRedditPosts(subreddit: String)
-    
     func redditRecentDidChangeClosure(callback: @escaping () -> Void) -> Void
+    
+    func fetchRedditPosts(subreddit: String, loadMore: Bool)
 }
 
 class HomeVM: HomeVMContract {
@@ -51,7 +51,7 @@ class HomeVM: HomeVMContract {
                 guard !searchString.isEmpty else { return }
                 search = searchString
             }
-            fetchRedditPosts(subreddit: search)
+            fetchRedditPosts(subreddit: search, loadMore: false)
         }
     }
     
@@ -73,6 +73,7 @@ class HomeVM: HomeVMContract {
     private var redditPostsDidChange: (() -> Void)?
     private var redditRecentDidChange: (() -> Void)?
     private var api: APIContract
+    private var after: String = ""
     
     // MARK: Methods
     
@@ -84,16 +85,23 @@ class HomeVM: HomeVMContract {
         redditRecentDidChange = callback
     }
     
-    func fetchRedditPosts(subreddit sub: String = "") {
+    func fetchRedditPosts(subreddit sub: String, loadMore: Bool) {
         isLoading = true
-        api.fetchRedditPosts(subreddit: sub) { [weak self](results) in
+        let param = loadMore ? after : ""
+        api.fetchRedditPosts(subreddit: sub, after: param) { [weak self](results, after) in
             switch results {
             case .failure(_):
                 print("An error occured while fetching reddit posts.")
                 self?.redditPosts.removeAll()
                 self?.isLoading = false
             case .success(let posts):
-                self?.redditPosts = posts
+                if loadMore {
+                    self?.redditPosts.append(contentsOf: posts)
+                } else {
+                    self?.redditPosts = posts
+                }
+                
+                self?.after = after
                 self?.isLoading = false
                 
                 // save the searchString if results
@@ -122,7 +130,7 @@ class HomeVM: HomeVMContract {
     
     init(api: APIContract) {
         self.api = api
-        fetchRedditPosts(subreddit: "")
+        fetchRedditPosts(subreddit: "", loadMore: false)
     }
     
 }

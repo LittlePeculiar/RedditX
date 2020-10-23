@@ -16,6 +16,7 @@ class PostDetailVC: UIViewController {
     
     // MARK: Properties
     private let viewModel: PostDetailVMContract
+    private var isFavoriteButton = UIButton()
 
 
     // MARK: Init
@@ -41,6 +42,12 @@ class PostDetailVC: UIViewController {
     private func setupUI() {
         self.title = viewModel.title
         
+        isFavoriteButton.addTarget(self, action: #selector(toggleFavorite), for: .touchUpInside)
+        isFavoriteButton.setImage(viewModel.favoriteImage, for: .normal)
+        
+        let barButton = UIBarButtonItem(customView: isFavoriteButton)
+        navigationItem.rightBarButtonItems = [barButton]
+        
         if let url = viewModel.redditURL {
             spinner.startAnimating()
             webView.load(URLRequest(url: url))
@@ -52,6 +59,11 @@ class PostDetailVC: UIViewController {
             }))
             self.present(alert, animated: true)
         }
+    }
+    
+    @objc private func toggleFavorite() {
+        viewModel.toggleFavorite()
+        isFavoriteButton.setImage(viewModel.favoriteImage, for: .normal)
     }
     
     private func goBack() {

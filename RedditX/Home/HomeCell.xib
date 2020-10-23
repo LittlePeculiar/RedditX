@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,30 +29,39 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYm-Wc-wUj">
-                                <rect key="frame" x="65" y="5" width="246" height="21"/>
+                                <rect key="frame" x="65" y="5" width="181" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STZ-EC-7xo">
-                                <rect key="frame" x="65" y="31" width="246" height="45"/>
+                                <rect key="frame" x="65" y="31" width="181" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isFavorite" translatesAutoresizingMaskIntoConstraints="NO" id="gkn-3l-gmK">
+                                <rect key="frame" x="256" y="15.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="AiM-uv-WW1"/>
+                                    <constraint firstAttribute="height" constant="50" id="sh7-KE-Ud3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="MYm-Wc-wUj" secondAttribute="trailing" constant="5" id="D2k-O0-K1a"/>
-                            <constraint firstItem="STZ-EC-7xo" firstAttribute="trailing" secondItem="MYm-Wc-wUj" secondAttribute="trailing" id="GxW-Wk-hbf"/>
                             <constraint firstItem="STZ-EC-7xo" firstAttribute="leading" secondItem="MYm-Wc-wUj" secondAttribute="leading" id="KDs-6v-pq1"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="KTF-Ua-kRw"/>
                             <constraint firstItem="Lfc-06-wxW" firstAttribute="leading" secondItem="4De-T0-dNY" secondAttribute="leading" constant="5" id="Qv6-PY-JfQ"/>
+                            <constraint firstAttribute="trailing" secondItem="gkn-3l-gmK" secondAttribute="trailing" constant="10" id="X92-bX-G6J"/>
                             <constraint firstItem="MYm-Wc-wUj" firstAttribute="leading" secondItem="Lfc-06-wxW" secondAttribute="trailing" constant="10" id="ZWR-Zf-gwr"/>
                             <constraint firstItem="STZ-EC-7xo" firstAttribute="top" secondItem="MYm-Wc-wUj" secondAttribute="bottom" constant="5" id="e9W-6v-Mhs"/>
+                            <constraint firstItem="gkn-3l-gmK" firstAttribute="centerY" secondItem="4De-T0-dNY" secondAttribute="centerY" id="eyq-rm-Xq2"/>
+                            <constraint firstItem="STZ-EC-7xo" firstAttribute="trailing" secondItem="MYm-Wc-wUj" secondAttribute="trailing" id="jem-83-yWB"/>
                             <constraint firstAttribute="bottom" secondItem="STZ-EC-7xo" secondAttribute="bottom" constant="5" id="se1-Wa-Lyg"/>
                             <constraint firstItem="MYm-Wc-wUj" firstAttribute="top" secondItem="Lfc-06-wxW" secondAttribute="top" id="stO-fd-xzA"/>
                             <constraint firstItem="Lfc-06-wxW" firstAttribute="top" secondItem="4De-T0-dNY" secondAttribute="top" constant="5" id="uux-HZ-nis"/>
+                            <constraint firstItem="gkn-3l-gmK" firstAttribute="leading" secondItem="STZ-EC-7xo" secondAttribute="trailing" constant="10" id="yxV-AK-ufP"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -65,6 +75,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="favoriteImageView" destination="gkn-3l-gmK" id="ZQ6-AH-Jfi"/>
                 <outlet property="subredditLabel" destination="MYm-Wc-wUj" id="oQ0-0e-uHr"/>
                 <outlet property="thumbnailImageView" destination="Lfc-06-wxW" id="sX8-ny-gYo"/>
                 <outlet property="titleLabel" destination="STZ-EC-7xo" id="iuq-dr-jN7"/>
@@ -73,6 +84,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="isFavorite" width="24" height="24"/>
         <image name="redditIcon" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

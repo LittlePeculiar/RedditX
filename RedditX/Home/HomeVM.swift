@@ -26,6 +26,7 @@ protocol HomeVMContract {
     func redditRecentDidChangeClosure(callback: @escaping () -> Void) -> Void
     
     func fetchRedditPosts(subreddit: String, loadMore: Bool)
+    func setFavorite(_ isFavorite: Bool, atIndex index: Int)
 }
 
 class HomeVM: HomeVMContract {
@@ -123,6 +124,12 @@ class HomeVM: HomeVMContract {
         if redditRecent.count > 5 {
             redditRecent.removeLast()
         }
+    }
+    
+    public func setFavorite(_ isFavorite: Bool, atIndex index: Int) {
+        var post = redditPosts[index]
+        post.setFavorite(isFavorite: isFavorite)
+        redditPosts[index] = post
     }
     
     

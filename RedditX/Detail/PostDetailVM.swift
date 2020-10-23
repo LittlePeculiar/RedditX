@@ -12,13 +12,19 @@ protocol PostDetailVMContract {
     var title: String { get }
     var alertTitle: String { get }
     var alertMessage: String { get }
+    var favoriteImage: UIImage? { get }
+    
+    func isFavoriteDidChangeClosure(callback: @escaping (Bool) -> Void)
+    func toggleFavorite()
 }
 
 class PostDetailVM: PostDetailVMContract {
     
     // MARK: Properties
-    let reddit: Reddit
+    var reddit: Reddit
     var redditURL: URL? { return reddit.redditURL }
+    
+    private var isFavoriteDidChange: ((Bool) -> Void)?
     
     public var title: String {
         return "SubReddit"
@@ -29,6 +35,19 @@ class PostDetailVM: PostDetailVMContract {
     }
     var alertMessage: String {
         return "You will be returned to Home View"
+    }
+    
+    var favoriteImage: UIImage? {
+        return reddit.isFavorite ? UIImage(named: "isFavorite") :UIImage(named: "addFavorite")
+    }
+    
+    func isFavoriteDidChangeClosure(callback: @escaping (Bool) -> Void) -> Void {
+        isFavoriteDidChange = callback
+    }
+    
+    func toggleFavorite() {
+        reddit.isFavorite = !reddit.isFavorite
+        isFavoriteDidChange?(reddit.isFavorite)
     }
     
     // MARK: Init

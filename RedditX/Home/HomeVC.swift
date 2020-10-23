@@ -201,7 +201,13 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let post = viewModel.redditPosts[indexPath.row]
-        let detailVC = PostDetailVC(viewModel: PostDetailVM(reddit: post))
+        let postVM = PostDetailVM(reddit: post)
+        
+        postVM.isFavoriteDidChangeClosure { [weak self](isFavorite) in
+            self?.viewModel.setFavorite(isFavorite, atIndex: indexPath.row)
+        }
+        
+        let detailVC = PostDetailVC(viewModel: postVM)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

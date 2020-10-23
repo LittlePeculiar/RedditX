@@ -32,6 +32,7 @@ struct Reddit: Decodable {
     var title: String
     var permalink: String
     var thumbnail: String
+    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case subreddit
@@ -56,6 +57,7 @@ struct Reddit: Decodable {
         self.title = ""
         self.permalink = ""
         self.thumbnail = ""
+        self.isFavorite = false
     }
     
     var thumbnailURL: URL? {
@@ -64,5 +66,9 @@ struct Reddit: Decodable {
     
     var redditURL: URL? {
         return URL(string: Constants.baseURL + permalink)
+    }
+    
+    mutating func setFavorite(isFavorite: Bool) {
+        self.isFavorite = isFavorite
     }
 }

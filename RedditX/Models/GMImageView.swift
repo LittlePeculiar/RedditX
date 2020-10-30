@@ -10,6 +10,9 @@ import UIKit
 extension UIImageView {
     
     func fetchImage(thumbnailURL: URL?) {
+        
+        // make sure placeholder image is installed
+        
         guard let placeholder = UIImage(named: "redditIcon") else {
             self.image = nil
             return

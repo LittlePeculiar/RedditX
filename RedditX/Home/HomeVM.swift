@@ -95,18 +95,18 @@ class HomeVM: HomeVMContract {
                 print("An error occured while fetching reddit posts.")
                 self?.redditPosts.removeAll()
                 self?.isLoading = false
-            case .success(let posts):
+            case .success(let result):
                 if loadMore {
-                    self?.redditPosts.append(contentsOf: posts)
+                    self?.redditPosts.append(contentsOf: result.children)
                 } else {
-                    self?.redditPosts = posts
+                    self?.redditPosts = result.children
                 }
                 
                 self?.after = after
                 self?.isLoading = false
                 
                 // save the searchString if results
-                guard !posts.isEmpty else { return }
+                guard !result.children.isEmpty else { return }
                 guard self?.searchType == .recent else { return }
                 guard let search = self?.searchString, !search.isEmpty else { return }
                 self?.updateRecent(searchString: search)

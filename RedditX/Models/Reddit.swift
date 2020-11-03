@@ -8,12 +8,12 @@
 import UIKit
 
 private struct RedditContainer: Decodable {
+    var data: Data
+    
     struct Data: Decodable {
         var children: [Reddit]
         var after: String
     }
-
-    var data: Data
 }
 
 struct Children: Decodable {

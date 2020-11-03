@@ -21,14 +21,14 @@ enum Constants {
 }
 
 protocol APIContract {
-    func fetchRedditPosts(subreddit: String, after: String, completion: @escaping (Swift.Result<[Reddit], FetchError>, String) -> Void)
+    func fetchRedditPosts(subreddit: String, after: String, completion: @escaping (Swift.Result<Children, FetchError>, String) -> Void)
 }
 
 class API: APIContract {
     
     let session = URLSession.shared
     
-    func fetchRedditPosts(subreddit sub: String, after: String, completion: @escaping (Result<[Reddit], FetchError>, String) -> Void) {
+    func fetchRedditPosts(subreddit sub: String, after: String, completion: @escaping (Result<Children, FetchError>, String) -> Void) {
         let postURLString = sub.isEmpty ? Constants.postURL : "/r/\(sub)" + Constants.postURL
         let afterURLString = after.isEmpty ? after : Constants.afterURL + after
         let fullURLString = Constants.baseURL + postURLString + afterURLString
@@ -47,11 +47,14 @@ class API: APIContract {
                 completion(.failure(.noData), "")
                 return
             }
-            guard let container = try? JSONDecoder().decode(Children.self, from: postData) else {
-                    completion(.failure(.serializationError), "")
-                    return
+            do {
+                let container = try JSONDecoder().decode(Children.self, from: postData)
+                completion(.success(container), after)
+            } catch {
+                print(error)
+                completion(.failure(.serializationError), "")
+                return
             }
-            completion(.success(container.children), container.after)
             
         }.resume()
     }

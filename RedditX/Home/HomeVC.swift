@@ -193,7 +193,8 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         else { return UITableViewCell() }
         
         let post = viewModel.redditPosts[indexPath.row]
-        cell.configure(with: post)
+        cell.configure(with: post, atIndex: indexPath.row)
+        cell.delegate = self
         return cell
     }
     
@@ -225,6 +226,13 @@ extension HomeVC: UITextFieldDelegate {
         viewModel.searchString = text
         loadRecents()
         return true
+    }
+}
+
+// HomeCell Delegate
+extension HomeVC: HomeCellDelegate {
+    func favoritesDidUnselect(atIndex index: Int) {
+        viewModel.setFavorite(false, atIndex: index)
     }
 }
 

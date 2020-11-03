@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,28 +40,48 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isFavorite" translatesAutoresizingMaskIntoConstraints="NO" id="gkn-3l-gmK">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFv-Bl-fzD">
                                 <rect key="frame" x="256" y="15.5" width="50" height="50"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isFavorite" translatesAutoresizingMaskIntoConstraints="NO" id="gkn-3l-gmK">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVU-95-1Zd">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <connections>
+                                            <action selector="toggleFavorite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Rew-Ke-9xY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="AiM-uv-WW1"/>
-                                    <constraint firstAttribute="height" constant="50" id="sh7-KE-Ud3"/>
+                                    <constraint firstAttribute="height" constant="50" id="796-SY-bD9"/>
+                                    <constraint firstAttribute="bottom" secondItem="CVU-95-1Zd" secondAttribute="bottom" id="BgV-Hh-7u6"/>
+                                    <constraint firstItem="CVU-95-1Zd" firstAttribute="top" secondItem="IFv-Bl-fzD" secondAttribute="top" id="EAa-bJ-vxR"/>
+                                    <constraint firstItem="gkn-3l-gmK" firstAttribute="top" secondItem="IFv-Bl-fzD" secondAttribute="top" id="L29-KB-ohN"/>
+                                    <constraint firstAttribute="bottom" secondItem="gkn-3l-gmK" secondAttribute="bottom" id="QBq-7y-a5X"/>
+                                    <constraint firstItem="gkn-3l-gmK" firstAttribute="leading" secondItem="IFv-Bl-fzD" secondAttribute="leading" id="WaI-Z4-G3C"/>
+                                    <constraint firstAttribute="trailing" secondItem="gkn-3l-gmK" secondAttribute="trailing" id="YoD-Qk-VXw"/>
+                                    <constraint firstItem="CVU-95-1Zd" firstAttribute="leading" secondItem="IFv-Bl-fzD" secondAttribute="leading" id="esR-Po-ac8"/>
+                                    <constraint firstAttribute="width" constant="50" id="i1w-m1-1IC"/>
+                                    <constraint firstAttribute="trailing" secondItem="CVU-95-1Zd" secondAttribute="trailing" id="mZj-Qw-hYe"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="STZ-EC-7xo" firstAttribute="leading" secondItem="MYm-Wc-wUj" secondAttribute="leading" id="KDs-6v-pq1"/>
+                            <constraint firstItem="IFv-Bl-fzD" firstAttribute="centerY" secondItem="4De-T0-dNY" secondAttribute="centerY" id="5ty-js-jbZ"/>
+                            <constraint firstItem="MYm-Wc-wUj" firstAttribute="leading" secondItem="Lfc-06-wxW" secondAttribute="trailing" constant="10" id="FBr-go-6Gv"/>
+                            <constraint firstAttribute="trailing" secondItem="IFv-Bl-fzD" secondAttribute="trailing" constant="10" id="J89-b5-H3B"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="KTF-Ua-kRw"/>
                             <constraint firstItem="Lfc-06-wxW" firstAttribute="leading" secondItem="4De-T0-dNY" secondAttribute="leading" constant="5" id="Qv6-PY-JfQ"/>
-                            <constraint firstAttribute="trailing" secondItem="gkn-3l-gmK" secondAttribute="trailing" constant="10" id="X92-bX-G6J"/>
-                            <constraint firstItem="MYm-Wc-wUj" firstAttribute="leading" secondItem="Lfc-06-wxW" secondAttribute="trailing" constant="10" id="ZWR-Zf-gwr"/>
+                            <constraint firstItem="IFv-Bl-fzD" firstAttribute="leading" secondItem="STZ-EC-7xo" secondAttribute="trailing" constant="10" id="Yyw-2c-atp"/>
                             <constraint firstItem="STZ-EC-7xo" firstAttribute="top" secondItem="MYm-Wc-wUj" secondAttribute="bottom" constant="5" id="e9W-6v-Mhs"/>
-                            <constraint firstItem="gkn-3l-gmK" firstAttribute="centerY" secondItem="4De-T0-dNY" secondAttribute="centerY" id="eyq-rm-Xq2"/>
-                            <constraint firstItem="STZ-EC-7xo" firstAttribute="trailing" secondItem="MYm-Wc-wUj" secondAttribute="trailing" id="jem-83-yWB"/>
+                            <constraint firstItem="STZ-EC-7xo" firstAttribute="leading" secondItem="Lfc-06-wxW" secondAttribute="trailing" constant="10" id="obK-XH-Abr"/>
                             <constraint firstAttribute="bottom" secondItem="STZ-EC-7xo" secondAttribute="bottom" constant="5" id="se1-Wa-Lyg"/>
                             <constraint firstItem="MYm-Wc-wUj" firstAttribute="top" secondItem="Lfc-06-wxW" secondAttribute="top" id="stO-fd-xzA"/>
                             <constraint firstItem="Lfc-06-wxW" firstAttribute="top" secondItem="4De-T0-dNY" secondAttribute="top" constant="5" id="uux-HZ-nis"/>
-                            <constraint firstItem="gkn-3l-gmK" firstAttribute="leading" secondItem="STZ-EC-7xo" secondAttribute="trailing" constant="10" id="yxV-AK-ufP"/>
+                            <constraint firstItem="IFv-Bl-fzD" firstAttribute="leading" secondItem="MYm-Wc-wUj" secondAttribute="trailing" constant="10" id="xEw-cd-DT3"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HomeCellDelegate: class {
+    func favoritesDidUnselect(atIndex index: Int)
+}
+
 class HomeCell: UITableViewCell {
     
     static var reuseIdentifier: String {
@@ -17,6 +21,9 @@ class HomeCell: UITableViewCell {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var subredditLabel: UILabel!
     @IBOutlet private var favoriteImageView: UIImageView!
+    
+    weak var delegate: HomeCellDelegate!
+    private var index: Int = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +35,8 @@ class HomeCell: UITableViewCell {
         favoriteImageView.isHidden = true
     }
     
-    func configure(with post: Reddit) {
+    func configure(with post: Reddit, atIndex index: Int) {
+        self.index = index
         titleLabel.text = post.title
         subredditLabel.text = post.subreddit
         thumbnailImageView.fetchImage(thumbnailURL: post.thumbnailURL)
@@ -38,4 +46,8 @@ class HomeCell: UITableViewCell {
         self.contentView.backgroundColor = backgroundColor
     }
     
+    @IBAction func toggleFavorite(_ sender: Any) {
+        guard let delegate = self.delegate else { return }
+        delegate.favoritesDidUnselect(atIndex: index)
+    }
 }

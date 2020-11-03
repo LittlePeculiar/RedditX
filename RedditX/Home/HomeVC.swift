@@ -74,7 +74,7 @@ class HomeVC: UIViewController {
         let contentHeight = scrollView.contentSize.height
         
         if (offsetY > contentHeight - scrollView.frame.height * 4) && viewModel.isLoading == false {
-            viewModel.fetchRedditPosts(subreddit: viewModel.searchString, loadMore: true)
+            viewModel.fetch(subreddit: viewModel.searchString, loadMore: true)
         }
     }
     

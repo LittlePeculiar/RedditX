@@ -51,13 +51,21 @@ struct Reddit: Decodable {
         permalink = try container.decode(String.self, forKey: .permalink)
         thumbnail = try container.decode(String.self, forKey: .thumbnail)
     }
+
+    public init() {
+        subreddit = ""
+        title = ""
+        permalink = ""
+        thumbnail = ""
+        isFavorite = false
+    }
     
     var thumbnailURL: URL? {
         return URL(string: thumbnail)
     }
     
     var redditURL: URL? {
-        return URL(string: Constants.baseURL + permalink)
+        return URL(string: APIUrls.baseURL + permalink)
     }
     
     mutating func setFavorite(isFavorite: Bool) {

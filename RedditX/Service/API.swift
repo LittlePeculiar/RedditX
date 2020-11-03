@@ -14,45 +14,36 @@ enum FetchError: Error {
     case serializationError
 }
 
-enum Constants {
-    static let baseURL = "https://www.reddit.com"
-    static let postURL = "/.json"
-    static let afterURL = "?limit=20&after="
-}
-
 protocol APIContract {
-    func fetchRedditPosts(subreddit: String, after: String, completion: @escaping (Swift.Result<Children, FetchError>, String) -> Void)
+    func fetch<T: Decodable>(forModel model: T.Type, urlString: String, completion: @escaping (Swift.Result<T, FetchError>) -> Void)
 }
 
 class API: APIContract {
     
     let session = URLSession.shared
     
-    func fetchRedditPosts(subreddit sub: String, after: String, completion: @escaping (Result<Children, FetchError>, String) -> Void) {
-        let postURLString = sub.isEmpty ? Constants.postURL : "/r/\(sub)" + Constants.postURL
-        let afterURLString = after.isEmpty ? after : Constants.afterURL + after
-        let fullURLString = Constants.baseURL + postURLString + afterURLString
+    func fetch<T: Decodable>(forModel model: T.Type, urlString: String, completion: @escaping (Swift.Result<T, FetchError>) -> Void) {
         
-        guard let url = URL(string: fullURLString) else {
-            completion(.failure(.invalidUrl), "")
+        guard let url = URL(string: urlString) else {
+            completion(.failure(.invalidUrl))
             return
         }
         
         session.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
-                completion(.failure(.responseFailure), "")
+                completion(.failure(.responseFailure))
                 return
             }
             guard let postData = data else {
-                completion(.failure(.noData), "")
+                completion(.failure(.noData))
                 return
             }
             do {
-                let container = try JSONDecoder().decode(Children.self, from: postData)
-                completion(.success(container), after)
+                let container = try JSONDecoder().decode(T.self, from: postData)
+                completion(.success(container))
             } catch {
                 print(error)
-                completion(.failure(.serializationError), "")
+                completion(.failure(.serializationError))
                 return
             }
             

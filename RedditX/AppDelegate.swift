@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
+
         homeVC = HomeVC(viewModel: HomeVM(api: API()))
         window?.rootViewController = UINavigationController(rootViewController: homeVC)
         window?.makeKeyAndVisible()
@@ -24,11 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // NOTE:: this fixes a strange bug where the underline bar is reset when coming from background
-        // not a permanent fix. still investigating - possible causes:
-        // 1. related to snapshot error
-        // 2. removing SceneDelegate
-        
         homeVC.refresh()
     }
 

@@ -52,16 +52,16 @@ class RedditXTests: XCTestCase {
         let api = API()
         
         // test constants for making api calls
-        XCTAssertEqual(Constants.baseURL, "https://www.reddit.com")
-        XCTAssertEqual(Constants.postURL, "/.json")
+        XCTAssertEqual(APIUrls.baseURL, "https://www.reddit.com")
+        XCTAssertEqual(APIUrls.postURL, "/.json")
         
         // test api call for all posts
-        api.fetchRedditPosts(subreddit: "") {(results) in
+        api.fetch(forModel: Children.self, urlString: "") {(results) in
             switch results {
             case .failure(_):
                 XCTFail("An error occured while fetching reddit posts.")
             case .success(let posts):
-                XCTAssertFalse(posts.isEmpty)
+                XCTAssertFalse(posts.children.isEmpty)
             }
             self.wait(for: [self.apiExpectation], timeout: 10.0)
             XCTAssertTrue(self.apiSuccess, "fetch Complete")
@@ -72,7 +72,7 @@ class RedditXTests: XCTestCase {
         let api = API()
         
         var sub = ""
-        var postURLString = sub.isEmpty ? Constants.postURL : "/r/\(sub)" + Constants.postURL
+        var postURLString = sub.isEmpty ? APIUrls.postURL : "/r/\(sub)" + APIUrls.postURL
         
         // test emtpy string
         if sub.isEmpty {
@@ -83,7 +83,7 @@ class RedditXTests: XCTestCase {
         
         // test non-emtpy string
         sub = "funny"
-        postURLString = sub.isEmpty ? Constants.postURL : "/r/\(sub)" + Constants.postURL
+        postURLString = sub.isEmpty ? APIUrls.postURL : "/r/\(sub)" + APIUrls.postURL
         if sub.isEmpty {
             XCTAssertEqual(postURLString, "/.json")
         } else {
@@ -91,12 +91,12 @@ class RedditXTests: XCTestCase {
         }
         
         // test api call for sub posts
-        api.fetchRedditPosts(subreddit: "") {(results) in
+        api.fetch(forModel: Children.self, urlString: "") {(results) in
             switch results {
             case .failure(_):
                 XCTFail("An error occured while fetching reddit posts.")
             case .success(let posts):
-                XCTAssertFalse(posts.isEmpty)
+                XCTAssertFalse(posts.children.isEmpty)
             }
             self.wait(for: [self.apiExpectation], timeout: 10.0)
             XCTAssertTrue(self.apiSuccess, "fetch Complete")

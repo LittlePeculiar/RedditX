@@ -52,14 +52,6 @@ struct Reddit: Decodable {
         thumbnail = try container.decode(String.self, forKey: .thumbnail)
     }
     
-    public init() {
-        self.subreddit = ""
-        self.title = ""
-        self.permalink = ""
-        self.thumbnail = ""
-        self.isFavorite = false
-    }
-    
     var thumbnailURL: URL? {
         return URL(string: thumbnail)
     }

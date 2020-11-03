@@ -56,7 +56,8 @@ class RedditXTests: XCTestCase {
         XCTAssertEqual(APIUrls.postURL, "/.json")
         
         // test api call for all posts
-        api.fetch(forModel: Children.self, urlString: "") {(results) in
+        let fullURLString = APIUrls.baseURL + APIUrls.postURL
+        api.fetch(forModel: Children.self, urlString: fullURLString) {(results) in
             switch results {
             case .failure(_):
                 XCTFail("An error occured while fetching reddit posts.")
@@ -91,7 +92,8 @@ class RedditXTests: XCTestCase {
         }
         
         // test api call for sub posts
-        api.fetch(forModel: Children.self, urlString: "") {(results) in
+        let fullURLString = APIUrls.baseURL + "/r/\(sub)" + APIUrls.postURL
+        api.fetch(forModel: Children.self, urlString: fullURLString) {(results) in
             switch results {
             case .failure(_):
                 XCTFail("An error occured while fetching reddit posts.")
